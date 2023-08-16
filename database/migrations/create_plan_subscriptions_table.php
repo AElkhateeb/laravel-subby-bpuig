@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('tag');
             $table->morphs('subscriber');
             $table->unsignedInteger('plan_id')->nullable();
-            $table->string('name')->nullable();
-            $table->string('description')->nullable();
+            $table->jsonb('name')->nullable();
+            $table->jsonb('description')->nullable();
             $table->decimal('price')->default('0.00');
             $table->string('currency', 3);
             $table->unsignedSmallInteger('trial_period')->default(0);

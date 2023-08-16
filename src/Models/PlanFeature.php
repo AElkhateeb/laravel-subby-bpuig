@@ -6,13 +6,14 @@ namespace Bpuig\Subby\Models;
 
 use Bpuig\Subby\Traits\BelongsToPlan;
 use Bpuig\Subby\Traits\HasResetDate;
+use Brackets\Translatable\Traits\HasTranslations;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Validation\Rule;
 
 class PlanFeature extends Model
 {
-    use BelongsToPlan, HasResetDate;
+    use BelongsToPlan, HasResetDate,HasTranslations;
 
     /**
      * {@inheritdoc}
@@ -38,7 +39,12 @@ class PlanFeature extends Model
         'resettable_interval' => 'string',
         'sort_order' => 'integer',
     ];
-
+    // these attributes are translatable
+    public $translatable = [
+        'name',
+        'description',
+    
+    ];
     /**
      * Create a new Eloquent model instance.
      *
@@ -66,8 +72,8 @@ class PlanFeature extends Model
                 }),
             ],
             'plan_id' => 'required|integer|exists:' . config('subby.tables.plans') . ',id',
-            'name' => 'required|string|max:150',
-            'description' => 'nullable|string|max:32768',
+            'name' => 'required',
+            'description' => 'nullable',
             'value' => 'required|string',
             'resettable_period' => 'sometimes|integer',
             'resettable_interval' => 'sometimes|in:hour,day,week,month',

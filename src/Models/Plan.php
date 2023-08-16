@@ -11,6 +11,7 @@ use Bpuig\Subby\Traits\HasPricing;
 use Bpuig\Subby\Traits\HasSubscriptionPeriod;
 use Bpuig\Subby\Traits\HasTrialPeriod;
 use Bpuig\Subby\Traits\MorphsSchedules;
+use Brackets\Translatable\Traits\HasTranslations;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -21,7 +22,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Plan extends Model
 {
-    use SoftDeletes, HasFeatures, HasPricing, HasTrialPeriod, HasSubscriptionPeriod, HasGracePeriod, MorphsSchedules;
+    use SoftDeletes, HasFeatures, HasPricing, HasTrialPeriod, HasSubscriptionPeriod, HasGracePeriod, MorphsSchedules,HasTranslations;
 
     /**
      * {@inheritdoc}
@@ -64,6 +65,13 @@ class Plan extends Model
         'deleted_at' => 'datetime',
     ];
 
+    // these attributes are translatable
+    public $translatable = [
+        'name',
+        'description',
+    
+    ];
+
     /**
      * Create a new Eloquent model instance.
      *
@@ -84,8 +92,8 @@ class Plan extends Model
     {
         return [
             'tag' => 'required|max:150|unique:' . config('subby.tables.plans') . ',tag',
-            'name' => 'required|string|max:150',
-            'description' => 'nullable|string|max:32768',
+            'name' => 'required',
+            'description' => 'nullable',
             'is_active' => 'sometimes|boolean',
             'price' => 'required|numeric',
             'signup_fee' => 'required|numeric',

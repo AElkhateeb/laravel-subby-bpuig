@@ -15,6 +15,7 @@ use Bpuig\Subby\Traits\HasPricing;
 use Bpuig\Subby\Traits\HasSubscriptionPeriodUsage;
 use Bpuig\Subby\Traits\HasTrialPeriodUsage;
 use Bpuig\Subby\Traits\HasSchedules;
+use Brackets\Translatable\Traits\HasTranslations;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Database\Eloquent\Builder;
@@ -27,7 +28,7 @@ use UnexpectedValueException;
 
 class PlanSubscription extends Model
 {
-    use BelongsToPlan, HasSchedules, HasFeatures, HasPricing, HasTrialPeriodUsage, HasSubscriptionPeriodUsage, HasGracePeriod, HasGracePeriodUsage;
+    use BelongsToPlan, HasSchedules, HasFeatures, HasPricing, HasTrialPeriodUsage, HasSubscriptionPeriodUsage, HasGracePeriod, HasGracePeriodUsage,HasTranslations;
 
     /**
      * {@inheritdoc}
@@ -78,7 +79,12 @@ class PlanSubscription extends Model
         'cancels_at' => 'datetime',
         'canceled_at' => 'datetime'
     ];
-
+    // these attributes are translatable
+    public $translatable = [
+        'name',
+        'description',
+    
+    ];
     /**
      * Create a new Eloquent model instance.
      *
@@ -110,8 +116,8 @@ class PlanSubscription extends Model
             'subscriber_id' => 'required|integer',
             'subscriber_type' => 'required|string|max:150',
             'plan_id' => 'required|exists:' . config('subby.tables.plans') . ',id',
-            'name' => 'required|string|max:150',
-            'description' => 'nullable|string|max:32768',
+            'name' => 'required',
+            'description' => 'nullable',
             'price' => 'required|numeric',
             'currency' => 'required|alpha|size:3',
             'trial_period' => 'sometimes|integer|max:100000',

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Bpuig\Subby\Models;
 
 use Bpuig\Subby\Traits\HasResetDate;
+use Brackets\Translatable\Traits\HasTranslations;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rule;
@@ -16,7 +17,7 @@ use InvalidArgumentException;
  */
 class PlanSubscriptionFeature extends Model
 {
-    use HasResetDate;
+    use HasResetDate,HasTranslations;
 
     /**
      * {@inheritdoc}
@@ -42,6 +43,13 @@ class PlanSubscriptionFeature extends Model
         'resettable_period' => 'integer',
         'resettable_interval' => 'string',
         'sort_order' => 'integer',
+    ];
+
+    // these attributes are translatable
+    public $translatable = [
+        'name',
+        'description',
+    
     ];
 
     /**
@@ -72,8 +80,8 @@ class PlanSubscriptionFeature extends Model
             ],
             'plan_subscription_id' => 'required|integer|exists:' . config('subby.tables.plan_subscriptions') . ',id',
             'plan_feature_id' => 'nullable|integer',
-            'name' => 'required|string|max:150',
-            'description' => 'nullable|string|max:32768',
+            'name' => 'required',
+            'description' => 'nullable',
             'value' => 'required|string',
             'resettable_period' => 'sometimes|integer',
             'resettable_interval' => 'sometimes|in:hour,day,week,month',

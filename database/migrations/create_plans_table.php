@@ -19,8 +19,8 @@ return new class extends Migration
             // Columns
             $table->increments('id');
             $table->string('tag')->unique();
-            $table->string('name');
-            $table->string('description')->nullable();
+            $table->jsonb('name');
+            $table->jsonb('description')->nullable();
             $table->boolean('is_active')->default(true);
             $table->decimal('price')->default('0.00');
             $table->decimal('signup_fee')->default('0.00');

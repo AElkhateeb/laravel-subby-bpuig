@@ -20,8 +20,8 @@ return new class extends Migration
             $table->increments('id');
             $table->string('tag');
             $table->unsignedInteger('plan_id');
-            $table->string('name');
-            $table->string('description')->nullable();
+            $table->jsonb('name');
+            $table->jsonb('description')->nullable();
             $table->string('value');
             $table->unsignedSmallInteger('resettable_period')->default(0);
             $table->string('resettable_interval')->default('month');

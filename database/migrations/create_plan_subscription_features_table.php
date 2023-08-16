@@ -20,8 +20,8 @@ return new class extends Migration
             $table->unsignedInteger('plan_subscription_id');
             $table->unsignedInteger('plan_feature_id')->nullable();
             $table->string('tag');
-            $table->string('name');
-            $table->string('description')->nullable();
+            $table->jsonb('name');
+            $table->jsonb('description')->nullable();
             $table->string('value');
             $table->unsignedSmallInteger('resettable_period')->default(0);
             $table->string('resettable_interval')->default('month');
