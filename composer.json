@@ -1,5 +1,5 @@
 {
-    "name": "bpuig/laravel-subby",
+    "name": "aelkhateeb/laravel-subby-bpuig",
     "description": "Laravel Subby is a flexible plans and subscription management system for Laravel.",
     "type": "library",
     "keywords": [
@@ -13,9 +13,9 @@
     ],
     "license": "MIT",
     "support": {
-        "issues": "https://github.com/bpuig/laravel-subby/issues",
-        "source": "https://github.com/bpuig/laravel-subby",
-        "docs": "https://github.com/bpuig/laravel-subby/blob/master/README.md"
+        "issues": "https://github.com/aelkhateeb/laravel-subby-bpuig/issues",
+        "source": "https://github.com/aelkhateeb/laravel-subby-bpuig",
+        "docs": "https://github.com/aelkhateeb/laravel-subby-bpuig/blob/master/README.md"
     },
     "authors": [
         {
